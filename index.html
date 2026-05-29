@@ -24,11 +24,9 @@
   <main>
     <section class="hero">
       <div class="hero-text">
-        <div class="badge">Локальный анализ • без загрузки фото на сервер</div>
-        <h1>Анализ гармонии лица по фото</h1>
+        <div class="badge">Анализ вашего лица без рекламы и подписок.</h1>
         <p>
-          Загрузи портрет, а сайт рассчитает условный индекс от 1 до 10:
-          симметрия, пропорции, скулы, глаза, нос, губы, челюсть и качество фото.
+          Загрузи портрет, а модель рассчитает общий результат.
         </p>
 
         <div class="actions">
@@ -41,14 +39,14 @@
 
         <p class="note">
           Это развлекательный инструмент. Он не определяет “реальную красоту” человека,
-          а считает геометрию лица и качество фотографии.
+          а считает геометрию лица и качество фотографии. Если вы недовольны результатом или результат ниже реального, не стоит расстраиваться, возможно сайт не правильно определил что то.
         </p>
       </div>
 
       <div class="preview-card">
         <div class="preview-top">
           <span id="modelStatus">Загрузка модели...</span>
-          <span class="privacy">Private</span>
+          <span class="privacy"> </span>
         </div>
 
         <div class="image-box" id="imageBox">
@@ -56,7 +54,7 @@
           <canvas id="overlayCanvas"></canvas>
           <div id="emptyState">
             <div class="empty-icon">+</div>
-            <p>Здесь появится фото</p>
+            <p>Загрузите фото</p>
           </div>
         </div>
       </div>
@@ -64,7 +62,7 @@
 
     <section id="result" class="result-grid hidden">
       <div class="score-card">
-        <span class="small-title">Общий индекс</span>
+        <span class="small-title">Общий результат</span>
         <div class="score-ring">
           <div>
             <strong id="mainScore">0.0</strong>
@@ -72,7 +70,7 @@
           </div>
         </div>
         <h2 id="scoreTitle">Результат</h2>
-        <p id="scoreText">После анализа здесь появится объяснение оценки.</p>
+        <p id="scoreText">После анализа ниже появится объяснение оценки.</p>
       </div>
 
       <div class="details-card">
@@ -88,19 +86,19 @@
       <h2>Как это работает</h2>
       <div class="how-grid">
         <div>
-          <span>01</span>
+          <span>1</span>
           <h3>Лицо ищется на фото</h3>
           <p>Браузер находит ключевые точки лица с помощью MediaPipe Face Landmarker.</p>
         </div>
         <div>
-          <span>02</span>
+          <span>2</span>
           <h3>Считаются пропорции</h3>
           <p>Сайт сравнивает расстояния между точками: скулы, глаза, нос, губы, подбородок.</p>
         </div>
         <div>
-          <span>03</span>
-          <h3>Выводится индекс</h3>
-          <p>Итоговый балл складывается из нескольких параметров, а не из одного признака.</p>
+          <span>3</span>
+          <h3>Выводится результат</h3>
+          <p>Итоговый балл складывается из нескольких параметров.</p>
         </div>
       </div>
     </section>
