@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Face Harmony AI</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    :root {
+      --bg: #050505;
+      --card: rgba(14, 14, 16, 0.92);
+      --card-strong: #101013;
+      --text: #f2f2f2;
+      --muted: #9a9a9a;
+      --line: rgba(255, 255, 255, 0.08);
+      --accent: #ffffff;
+      --accent-2: #777777;
+      --good: #d8d8d8;
+      --shadow: none;
+    }
+
+    body {
+      background: #050505;
+      color: var(--text);
+    }
+
+    .bg-orb {
+      display: none;
+    }
+
+    .header {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      background: #fff;
+      box-shadow: none;
+    }
+
+    nav a {
+      color: #8c8c8c;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .hero {
+      min-height: auto;
+      padding: 72px 0 40px;
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+
+    .badge {
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: #fff;
+      font-size: clamp(34px, 6vw, 62px);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+      max-width: 650px;
+    }
+
+    .hero-text p {
+      max-width: 560px;
+      color: #a0a0a0;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .actions {
+      margin-top: 24px;
+    }
+
+    .upload-btn,
+    button {
+      border-radius: 10px;
+      box-shadow: none;
+      transition: opacity 0.2s ease, background 0.2s ease, border 0.2s ease;
+    }
+
+    .upload-btn {
+      background: #fff;
+      color: #050505;
+    }
+
+    button {
+      background: #111;
+      border: 1px solid #252525;
+      color: #fff;
+    }
+
+    button:not(:disabled):hover,
+    .upload-btn:hover {
+      transform: none;
+      opacity: 0.82;
+    }
+
+    .note {
+      max-width: 620px !important;
+      color: #777 !important;
+      font-size: 13px !important;
+    }
+
+    .preview-card,
+    .score-card,
+    .details-card,
+    .how-grid > div {
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+
+    .preview-card,
+    .score-card,
+    .details-card {
+      border-radius: 18px;
+    }
+
+    .preview-top {
+      color: #777;
+    }
+
+    .image-box {
+      border-radius: 14px;
+      background: #0a0a0b;
+      border: 1px solid #1c1c1f;
+    }
+
+    .empty-icon {
+      border-radius: 12px;
+      border-color: #2a2a2d;
+    }
+
+    .result-grid {
+      margin-top: 24px;
+    }
+
+    .score-ring {
+      background:
+        conic-gradient(#fff calc(var(--score-progress, 0) * 1%), #1e1e22 0);
+    }
+
+    .score-ring::after {
+      background: #0d0d10;
+    }
+
+    .score-card h2,
+    .how h2 {
+      letter-spacing: -0.04em;
+    }
+
+    .metric {
+      background: #0d0d10;
+      border: 1px solid #1e1e22;
+      border-radius: 12px;
+    }
+
+    .bar {
+      background: #1e1e22;
+    }
+
+    .bar > i {
+      background: #fff;
+    }
+
+    .how {
+      padding-top: 32px;
+    }
+
+    .how-grid > div {
+      border-radius: 14px;
+    }
+
+    .how-grid span {
+      color: #fff;
+    }
+
+    footer {
+      color: #686868;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+    }
+
+    @media (max-width: 920px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 42px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orb orb-one"></div>
+  <div class="bg-orb orb-two"></div>
+
+  <header class="header">
+    <a class="logo" href="#">
+      <span class="logo-mark"></span>
+      <span>Face Harmony</span>
+    </a>
+    <nav>
+      <a href="#how">Как работает</a>
+      <a href="#result">Результат</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <div class="badge">Анализ вашего лица без рекламы и подписок.</div>
+        <p>
+          Загрузи портрет, а модель рассчитает общий результат.
+        </p>
+
+        <div class="actions">
+          <label class="upload-btn">
+            <input id="fileInput" type="file" accept="image/*" />
+            Выбрать фото
+          </label>
+          <button id="analyzeBtn" disabled>Проанализировать</button>
+        </div>
+
+        <p class="note">
+          Это развлекательный инструмент. Он не определяет “реальную красоту” человека,
+          а считает геометрию лица и качество фотографии. Если вы недовольны результатом или результат ниже реального, не стоит расстраиваться, возможно сайт не правильно определил что то.
+        </p>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-top">
+          <span id="modelStatus">Загрузка модели...</span>
+          <span class="privacy"> </span>
+        </div>
+
+        <div class="image-box" id="imageBox">
+          <img id="previewImage" alt="Загруженное фото" />
+          <canvas id="overlayCanvas"></canvas>
+          <div id="emptyState">
+            <div class="empty-icon">+</div>
+            <p>Загрузите фото</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="result" class="result-grid hidden">
+      <div class="score-card">
+        <span class="small-title">Общий результат</span>
+        <div class="score-ring">
+          <div>
+            <strong id="mainScore">0.0</strong>
+            <span>/10</span>
+          </div>
+        </div>
+        <h2 id="scoreTitle">Результат</h2>
+        <p id="scoreText">После анализа ниже появится объяснение оценки.</p>
+      </div>
+
+      <div class="details-card">
+        <div class="details-head">
+          <span class="small-title">Что оценилось</span>
+          <button id="resetBtn">Сбросить</button>
+        </div>
+        <div id="metricsList" class="metrics-list"></div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2>Как это работает</h2>
+      <div class="how-grid">
+        <div>
+          <span>1</span>
+          <h3>Лицо ищется на фото</h3>
+          <p>Браузер находит ключевые точки лица с помощью MediaPipe Face Landmarker.</p>
+        </div>
+        <div>
+          <span>2</span>
+          <h3>Считаются пропорции</h3>
+          <p>Сайт сравнивает расстояния между точками: скулы, глаза, нос, губы, подбородок.</p>
+        </div>
+        <div>
+          <span>3</span>
+          <h3>Выводится результат</h3>
+          <p>Итоговый балл складывается из нескольких параметров.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Face Harmony — demo project. Результат является условным и зависит от ракурса, света и качества фото.</p>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
